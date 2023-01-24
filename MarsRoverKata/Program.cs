@@ -2,7 +2,7 @@
 
 namespace MarsRoverKata
 {
-    internal class RoverProgram
+    public class RoverProgram
     {
         public static int GridSize;
         public static readonly GridPoint obstacle = new GridPoint(1,1);
@@ -53,6 +53,11 @@ namespace MarsRoverKata
             Console.WriteLine($"What is the command instruction? (exp: fflfbrfb)");
             string instructions = Console.ReadLine();
 
+            ReadInstruction(rover, instructions);
+        }
+
+        public static void ReadInstruction(Rover rover, string instructions)
+        {
             try
             {
                 foreach (char instruction in instructions.ToLower())

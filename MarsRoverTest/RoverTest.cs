@@ -10,6 +10,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestMoveForwardNorth()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.North);
             rover.MoveForward();
             Assert.AreEqual(new GridPoint(4,5), rover.position);
@@ -18,6 +19,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestMoveForwardSouth()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.South);
             rover.MoveForward();
             Assert.AreEqual(new GridPoint(4, 3), rover.position);
@@ -26,6 +28,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestMoveForwardEast()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.East);
             rover.MoveForward();
             Assert.AreEqual(new GridPoint(5, 4), rover.position);
@@ -34,6 +37,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestMoveForwardWest()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.West);
             rover.MoveForward();
             Assert.AreEqual(new GridPoint(3, 4), rover.position);
@@ -42,6 +46,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestMoveBackwardNorth()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.North);
             rover.MoveBackward();
             Assert.AreEqual(new GridPoint(4, 3), rover.position);
@@ -50,6 +55,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestMoveBackWardSouth()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.South);
             rover.MoveBackward();
             Assert.AreEqual(new GridPoint(4, 5), rover.position);
@@ -58,6 +64,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestMoveBackwardEast()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.East);
             rover.MoveBackward();
             Assert.AreEqual(new GridPoint(3, 4), rover.position);
@@ -66,6 +73,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestMoveBackwardWest()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.West);
             rover.MoveBackward();
             Assert.AreEqual(new GridPoint(5, 4), rover.position);
@@ -74,6 +82,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestTurnRight()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.North);
             rover.TurnRight();
             Assert.AreEqual(Direction.East, rover.Heading);
@@ -88,6 +97,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestTurnLeft()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 4), Direction.North);
             rover.TurnLeft();
             Assert.AreEqual(Direction.West, rover.Heading);
@@ -102,6 +112,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestForwardWrapping()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 8), Direction.North);
             rover.MoveForward();
             Assert.AreEqual(new GridPoint(4, 0), rover.position);
@@ -122,6 +133,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestBackwardWrapping()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(4, 0), Direction.North);
             rover.MoveBackward();
             Assert.AreEqual(new GridPoint(4, 8), rover.position);
@@ -142,6 +154,7 @@ namespace MarsRoverKataTest
         [TestMethod]
         public void TestObstacleDetection()
         {
+            RoverProgram.GridSize = 8;
             Rover rover = new Rover(new GridPoint(1, 0), Direction.North);
             try
             {
@@ -150,8 +163,22 @@ namespace MarsRoverKataTest
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex is Exception);
+                Assert.IsTrue(ex is ObstacleOnGridException);
             }
+        }
+
+        [TestMethod]
+        public void TestReadInstruction()
+        {
+            RoverProgram.GridSize = 8;
+            Rover rover = new Rover(new GridPoint(0, 0), Direction.North);
+            string instructions = "fff";
+            RoverProgram.ReadInstruction(rover, instructions);
+            Assert.AreEqual(new GridPoint(0, 3), rover.position);
+
+            instructions = "rffrbrff";
+            RoverProgram.ReadInstruction(rover, instructions);
+            Assert.AreEqual(new GridPoint(0, 4), rover.position);
         }
     }
 }
