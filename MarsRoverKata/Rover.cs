@@ -90,7 +90,7 @@ namespace MarsRoverKata
             GridPoint nextPoint = position.GetNextForwardPoint(this.Heading);
             if (nextPoint.Equals(RoverProgram.obstacle))
             {
-                throw new Exception($"Report: Obstacle encountered at {nextPoint}, aborting sequence!");
+                throw new ObstacleOnGridException($"Report: Obstacle encountered at {nextPoint}, aborting sequence!", nextPoint);
             }
             else
             {
@@ -108,7 +108,7 @@ namespace MarsRoverKata
             GridPoint nextPoint = position.GetNextBackwardPoint(this.Heading);
             if (DetectObstacle(nextPoint))
             {
-                throw new Exception($"Report: Obstacle encountered at {nextPoint}, aborting sequence!");
+                throw new ObstacleOnGridException($"Report: Obstacle encountered at {nextPoint}, aborting sequence!", nextPoint);
             }
 
             this.position = nextPoint;
